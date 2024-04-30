@@ -48,6 +48,8 @@ US_totals <- US_by_state %>% group_by(Country_Region, date) %>% summarize(cases 
 
 ## COVID Data Visualizations
 The following visualizations represent analysis of the data extracted from John Hopkins recorded COVID data.
+
+The visualizations demonstrate the correlation between COVID deaths and cases, signalling the primary mechanism to preventing significant loss from the virus was to prevent cases from occuring and take proactive measures. We can see similar cases-death patterns between the overall US numbers as well as state numbers, in this cases Oregon. The state numbers interesting even include slight jumps/dips in case and death numbers just prior to the start of 2021 and just after the start of 2022, signalling the increased likelihood of the virus in winter months.
 ```{r visualize data, include=TRUE}
 US_totals %>% filter(cases > 0) %>% ggplot(aes(x = date, y = cases)) + geom_line(aes(color = "cases")) + geom_point(aes(color = "cases")) + geom_line(aes(y = deaths, color = "deaths")) + geom_point(aes(y = deaths, color = "deaths")) + scale_y_log10() + theme(legend.position = "bottom", axis.text.x = element_text(angle = 90)) + labs(title = "COVID 19 in the US", y = NULL)
 state <- "Oregon"
