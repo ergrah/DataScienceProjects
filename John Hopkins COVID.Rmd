@@ -54,6 +54,9 @@ state <- "Oregon"
 US_by_state %>% filter(Province_State == state) %>% filter(cases > 0) %>% ggplot(aes(x = date, y = cases)) + geom_line(aes(color = "cases")) + geom_point(aes(color = "cases")) + geom_line(aes(y = deaths, color = "deaths")) + geom_point(aes(y = deaths, color = "deaths")) + scale_y_log10() + theme(legend.position = "bottom", axis.text.x = element_text(angle = 90)) + labs(title = str_c("COVID 19 in ", state), y = NULL)
 ```
 
+## Bias Identification
+The data used in this analysis was data provided by John Hopkins and identified COVID 19 cases and deaths which were confirmed to be associated to COVID 19. There is likely data missing from this analysis where citizens did not report or did not go through traditional health system mechanisms which would have ensured there cases were recorded in this data.
+
 ```{r model data, include=TRUE}
 US_by_state_sum <- US_by_state %>% group_by(Province_State) %>% summarise(cases = sum(cases), deaths = sum(deaths), Population = max(Population))
 US_by_state_sum <- US_by_state_sum %>% mutate(cases_per_thou = cases *1000 / Population, deaths_per_thou = deaths *1000 / Population)
